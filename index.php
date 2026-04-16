@@ -174,33 +174,33 @@ nav {
 /* Kill old underline */
 .nav-links a::after { display:none !important; }
 
-/* ── Active nav link ────────────────────────────────────────── */
+/* ── Active nav link — spinning fire border ─────────────────── */
 .nav-links a.nav-active {
-  color:#fff;
-  background:linear-gradient(135deg,rgba(124,58,237,.55),rgba(59,130,246,.45));
-  box-shadow:0 0 0 1px rgba(124,58,237,.45), 0 4px 18px rgba(124,58,237,.25);
-  animation:navActivePop .3s cubic-bezier(.34,1.56,.64,1) both;
+  color:var(--text);
+  overflow:hidden;
+  position:relative;
+  z-index:0;
 }
-/* Keep amber tint for pricing when active */
-.nav-links a[href="#pricing"].nav-active {
-  background:linear-gradient(135deg,rgba(245,158,11,.4),rgba(245,158,11,.25));
-  box-shadow:0 0 0 1px rgba(245,158,11,.4), 0 4px 14px rgba(245,158,11,.2);
-  color:var(--amber);
-}
-@keyframes navActivePop {
-  0%  { transform:scale(.88); opacity:.4; }
-  100%{ transform:scale(1);   opacity:1;  }
-}
-/* Subtle pulsing glow while active */
+/* Spinning conic-gradient layer */
 .nav-links a.nav-active::before {
-  content:''; position:absolute; inset:0; border-radius:8px;
-  background:inherit; filter:blur(8px); opacity:.35; z-index:-1;
-  animation:navGlow 2.5s ease-in-out infinite;
+  content:''; position:absolute; inset:-200%;
+  background:conic-gradient(
+    #f59e0b 0deg, #ef4444 72deg,
+    #a855f7 144deg, #06b6d4 216deg,
+    #3b82f6 288deg, #f59e0b 360deg
+  );
+  animation:fireSpin 1.6s linear infinite;
+  z-index:-2;
 }
-@keyframes navGlow {
-  0%,100%{ opacity:.2; transform:scale(1); }
-  50%    { opacity:.45; transform:scale(1.06); }
+/* Inner fill — masks gradient, leaving only the border ring */
+.nav-links a.nav-active::after {
+  content:''; position:absolute; inset:1.5px;
+  border-radius:7px;
+  background:#07070e;
+  z-index:-1;
 }
+[data-theme="light"] .nav-links a.nav-active::after { background:#ededf4; }
+@keyframes fireSpin { to { transform:rotate(360deg); } }
 
 /* ── Nav right cluster ──────────────────────────────────────── */
 .nav-right { flex-shrink:0; display:flex; align-items:center; gap:8px; }
@@ -1969,17 +1969,20 @@ window.addEventListener('scroll',()=>{
     el  : document.querySelector(a.getAttribute('href'))
   })).filter(o => o.el);
 
+  // Sort by DOM position so forEach finds the correct active section
+  const sorted = [...sections].sort((a,b) => a.el.offsetTop - b.el.offsetTop);
+
   function setActive(id){
     links.forEach(a => a.classList.remove('nav-active'));
+    if(!id) return;
     const match = sections.find(o => o.el.id === id);
     if(match) match.link.classList.add('nav-active');
   }
 
   function onScroll(){
     const scrollY = window.scrollY + NAV_H + 60;
-    // Find the last section whose top is above current scroll position
-    let current = sections[0].el.id;
-    sections.forEach(({ el }) => {
+    let current = '';
+    sorted.forEach(({ el }) => {
       if(el.offsetTop <= scrollY) current = el.id;
     });
     setActive(current);
