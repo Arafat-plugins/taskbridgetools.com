@@ -1079,10 +1079,11 @@ footer{
 .terminal-body {
   padding:9px 11px; font-family:'Fira Code',monospace;
   font-size:.61rem; line-height:2;
+  overflow:hidden;
 }
 .t-prompt { color:#4ec9b0; }
 .t-cmd { color:#9cdcfe; }
-.t-output { color:rgba(255,255,255,.44); }
+.t-output { color:rgba(255,255,255,.44); min-height:1.22em; }
 .t-cursor-block {
   display:inline-block; width:6px; height:.75em;
   background:#4ec9b0; margin-left:2px;
