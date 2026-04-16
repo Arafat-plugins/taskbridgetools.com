@@ -1082,8 +1082,8 @@ footer{
   overflow:hidden;
 }
 .t-prompt { color:#4ec9b0; }
-.t-cmd { color:#9cdcfe; }
-.t-output { color:rgba(255,255,255,.44); min-height:1.22em; }
+.t-cmd { color:#9cdcfe; white-space:nowrap; }
+.t-output { color:rgba(255,255,255,.44); min-height:2em; white-space:nowrap; overflow:hidden; }
 .t-cursor-block {
   display:inline-block; width:6px; height:.75em;
   background:#4ec9b0; margin-left:2px;
@@ -1402,7 +1402,7 @@ footer { padding-bottom:54px !important; }
         <span class="terminal-title">zsh — taskbridge</span>
       </div>
       <div class="terminal-body">
-        <div><span class="t-prompt">➜</span> <span class="t-cmd" id="t-cmd"></span><span class="t-cursor-block"></span></div>
+        <div style="white-space:nowrap;overflow:hidden;"><span class="t-prompt">➜</span> <span class="t-cmd" id="t-cmd"></span><span class="t-cursor-block"></span></div>
         <div class="t-output" id="t-output"></div>
         <div style="color:#34d399;margin-top:5px;font-size:.58rem;font-family:'Fira Code',monospace">● Open to Work</div>
       </div>
