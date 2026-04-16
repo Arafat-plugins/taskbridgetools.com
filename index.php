@@ -887,6 +887,49 @@ footer{
   .hero-stats  { gap:18px; }
 }
 
+/* ── First-visit light-mode hint toast ──────────────────────── */
+.theme-hint{
+  position:fixed; bottom:64px; left:50%;
+  transform:translateX(-50%) translateY(calc(100% + 24px));
+  opacity:0;
+  z-index:9998;
+  display:flex; align-items:center; gap:10px;
+  background:rgba(15,12,30,.92);
+  backdrop-filter:blur(20px) saturate(1.6);
+  border:1px solid rgba(124,58,237,.45);
+  border-radius:50px;
+  padding:11px 22px 14px;
+  cursor:pointer;
+  font-family:'Inter',sans-serif; font-size:.88rem; color:var(--text);
+  box-shadow:0 8px 40px rgba(124,58,237,.28), 0 2px 8px rgba(0,0,0,.5);
+  white-space:nowrap; overflow:hidden;
+  transition:transform .55s cubic-bezier(.34,1.56,.64,1), opacity .45s ease;
+}
+.theme-hint.th-show{
+  transform:translateX(-50%) translateY(0);
+  opacity:1;
+}
+.theme-hint.th-hide{
+  transform:translateX(-50%) translateY(calc(100% + 24px));
+  opacity:0;
+  transition:transform .45s ease, opacity .4s ease;
+}
+.theme-hint-icon{ font-size:1.1rem; line-height:1; }
+.theme-hint-text strong{ color:var(--primary2); }
+.theme-hint-bar{
+  position:absolute; bottom:0; left:0;
+  height:3px; width:100%;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  border-radius:0 0 50px 50px;
+  transform-origin:left;
+  transform:scaleX(1);
+}
+.theme-hint.th-show .theme-hint-bar{
+  animation:hintBar 7s linear forwards;
+}
+@keyframes hintBar{from{transform:scaleX(1);}to{transform:scaleX(0);}}
+@media(max-width:600px){.theme-hint{font-size:.8rem;padding:10px 16px 13px;}}
+
 /* ═══════════════════════════════════════════════════════════════
    VS CODE / CURSOR / CLAUDE — DYNAMIC ENHANCEMENTS
    ═══════════════════════════════════════════════════════════════ */
@@ -912,6 +955,10 @@ footer{
 [data-theme="light"] .scan-line { opacity:.35; }
 
 /* ── VS Code–style floating code card ───────────────────────── */
+@keyframes cardGlow{
+  0%,100%{box-shadow:0 24px 64px rgba(0,0,0,.8),0 0 0 1px rgba(99,102,241,.1),inset 0 1px 0 rgba(255,255,255,.04),0 0 32px rgba(124,58,237,.08);}
+  50%    {box-shadow:0 24px 64px rgba(0,0,0,.8),0 0 0 1px rgba(99,102,241,.22),inset 0 1px 0 rgba(255,255,255,.06),0 0 56px rgba(124,58,237,.2);}
+}
 .code-card-float {
   position:absolute; bottom:-10px; left:-40px;
   width:292px; border-radius:10px;
@@ -921,7 +968,7 @@ footer{
   box-shadow:0 24px 64px rgba(0,0,0,.8), 0 0 0 1px rgba(99,102,241,.1),
              inset 0 1px 0 rgba(255,255,255,.04),
              0 0 40px rgba(124,58,237,.08);
-  animation:floatCard 4s ease-in-out infinite;
+  animation:cardGlow 4s ease-in-out infinite;
   backdrop-filter:blur(14px); z-index:10;
 }
 .cc-tabs {
@@ -2053,6 +2100,41 @@ window.addEventListener('scroll',()=>{
     }
   }
   setTimeout(tick, 1200);
+})();
+</script>
+
+<!-- First-visit light mode hint -->
+<div id="theme-hint" class="theme-hint" role="button" aria-label="Switch to light mode">
+  <span class="theme-hint-icon">☀️</span>
+  <span class="theme-hint-text">You can view this page in <strong>Light Mode</strong> — click to switch</span>
+  <span class="theme-hint-bar"></span>
+</div>
+
+<script>
+/* ── First-visit theme hint ─────────────────────────────────── */
+(function(){
+  if(localStorage.getItem('tb-visited')) return;
+  localStorage.setItem('tb-visited','1');
+  const hint = document.getElementById('theme-hint');
+  const btn  = document.getElementById('theme-toggle');
+  if(!hint || !btn) return;
+
+  /* show after short delay */
+  const showTimer = setTimeout(()=>{ hint.classList.add('th-show'); }, 900);
+
+  /* auto-hide after 7 s visible */
+  const hideTimer = setTimeout(()=>{
+    hint.classList.remove('th-show');
+    hint.classList.add('th-hide');
+  }, 7900);
+
+  /* click → switch theme + dismiss */
+  hint.addEventListener('click', ()=>{
+    clearTimeout(hideTimer);
+    btn.click();
+    hint.classList.remove('th-show');
+    hint.classList.add('th-hide');
+  });
 })();
 </script>
 </body>
