@@ -176,33 +176,13 @@ nav {
 /* Kill old underline */
 .nav-links a::after { display:none !important; }
 
-/* ── Active nav link — spinning fire border ─────────────────── */
+/* ── Active nav link — capsule border only ───────────────────── */
 .nav-links a.nav-active {
   color:var(--text);
-  overflow:hidden;
-  position:relative;
-  z-index:0;
+  border:1.5px solid rgba(124,58,237,.7);
+  border-radius:50px;
+  padding:5px 11px;
 }
-/* Spinning conic-gradient layer */
-.nav-links a.nav-active::before {
-  content:''; position:absolute; inset:-200%;
-  background:conic-gradient(
-    #f59e0b 0deg, #ef4444 72deg,
-    #a855f7 144deg, #06b6d4 216deg,
-    #3b82f6 288deg, #f59e0b 360deg
-  );
-  animation:fireSpin 1.6s linear infinite;
-  z-index:-2;
-}
-/* Inner fill — masks gradient, leaving only the border ring */
-.nav-links a.nav-active::after {
-  content:''; position:absolute; inset:1.5px;
-  border-radius:7px;
-  background:#07070e;
-  z-index:-1;
-}
-[data-theme="light"] .nav-links a.nav-active::after { background:#ededf4; }
-@keyframes fireSpin { to { transform:rotate(360deg); } }
 
 /* ── Nav right cluster ──────────────────────────────────────── */
 .nav-right { flex-shrink:0; display:flex; align-items:center; gap:8px; }
