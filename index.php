@@ -1412,8 +1412,12 @@ footer { padding-bottom:54px !important; }
   <div class="skills-grid">
     <?php
     $skills = [
-      ['PHP',              'fa-brands fa-php',         92],
-      ['WordPress',        'fa-brands fa-wordpress',   95],
+      ['WooCommerce',      'fa-solid fa-store',         94],
+      ['AI Agent Dev',     'fa-solid fa-brain',          87],
+      ['Claude / OpenAI',  'fa-solid fa-microchip',      85],
+      ['n8n Automation',   'fa-solid fa-diagram-project',82],
+      ['PHP',              'fa-brands fa-php',           92],
+      ['WordPress',        'fa-brands fa-wordpress',     95],
       ['MySQL',            'fa-solid fa-database',      88],
       ['JavaScript',       'fa-brands fa-js',           80],
       ['jQuery / AJAX',    'fa-solid fa-bolt',          85],
