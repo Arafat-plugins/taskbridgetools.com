@@ -250,10 +250,10 @@ nav {
 .hero {
   min-height:100vh;
   display:flex; align-items:center;
-  padding:120px 5% 80px;
-  gap:40px;
+  padding:120px 4% 80px;
+  gap:60px;
 }
-.hero-text { flex:1; max-width:580px; }
+.hero-text { flex:1; max-width:640px; }
 .hero-badge {
   display:inline-flex; align-items:center; gap:8px;
   padding:6px 16px; border-radius:50px;
@@ -272,7 +272,7 @@ nav {
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
 .hero h1 {
   font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(2.2rem,4.5vw,3.8rem);
+  font-size:clamp(2.4rem,5vw,4.2rem);
   font-weight:800; line-height:1.15;
   animation:fadeUp .7s ease .1s both;
 }
@@ -324,7 +324,7 @@ nav {
 }
 .stat-num {
   font-family:'Space Grotesk',sans-serif;
-  font-size:1.8rem; font-weight:800;
+  font-size:2rem; font-weight:800;
   background:linear-gradient(135deg,var(--text),var(--primary2));
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
 }
@@ -336,7 +336,7 @@ nav {
 .hero-visual {
   flex-shrink:0;
   position:relative;
-  width:500px; height:500px;
+  width:560px; height:560px;
   animation:fadeUp .9s ease .15s both;
 }
 
@@ -349,12 +349,12 @@ nav {
   animation:spinSlow var(--sp) linear infinite;
 }
 .ring-deco.r1{
-  width:290px;height:290px;
+  width:325px;height:325px;
   border:1px dashed rgba(124,58,237,.25);
   --sp:25s;
 }
 .ring-deco.r2{
-  width:450px;height:450px;
+  width:510px;height:510px;
   border:1px dashed rgba(6,182,212,.18);
   --sp:40s; animation-direction:reverse;
 }
@@ -364,7 +364,7 @@ nav {
 .orbit-center {
   position:absolute;
   top:50%;left:50%;
-  width:140px;height:140px;
+  width:158px;height:158px;
   transform:translate(-50%,-50%);
   border-radius:50%;
   z-index:5;
@@ -393,10 +393,10 @@ nav {
 }
 @keyframes pingRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.5);opacity:0;}}
 
-/* Orbit icons — inner ring (r=145px, 18s, 5 icons) */
+/* Orbit icons — inner ring (r=162px, 18s, 5 icons) */
 .orb-icon {
   position:absolute; top:50%; left:50%;
-  width:46px;height:46px; margin:-23px;
+  width:52px;height:52px; margin:-26px;
   border-radius:13px;
   background:var(--card2);
   border:1px solid var(--border);
@@ -410,8 +410,8 @@ nav {
 
 /* Inner ring */
 @keyframes orbit-i{
-  from{transform:rotate(0deg) translateX(145px) rotate(0deg);}
-  to  {transform:rotate(360deg) translateX(145px) rotate(-360deg);}
+  from{transform:rotate(0deg) translateX(162px) rotate(0deg);}
+  to  {transform:rotate(360deg) translateX(162px) rotate(-360deg);}
 }
 .oi1{animation:orbit-i 18s linear infinite 0s;}
 .oi2{animation:orbit-i 18s linear infinite -3.6s;}
@@ -419,10 +419,10 @@ nav {
 .oi4{animation:orbit-i 18s linear infinite -10.8s;}
 .oi5{animation:orbit-i 18s linear infinite -14.4s;}
 
-/* Outer ring (r=225px, 32s, 6 icons) */
+/* Outer ring (r=256px, 32s, 6 icons) */
 @keyframes orbit-o{
-  from{transform:rotate(0deg) translateX(225px) rotate(0deg);}
-  to  {transform:rotate(360deg) translateX(225px) rotate(-360deg);}
+  from{transform:rotate(0deg) translateX(256px) rotate(0deg);}
+  to  {transform:rotate(360deg) translateX(256px) rotate(-360deg);}
 }
 .oo1{animation:orbit-o 32s linear infinite 0s;}
 .oo2{animation:orbit-o 32s linear infinite -5.33s;}
@@ -814,11 +814,11 @@ footer{
 /* ── Tablet landscape (≤1024px) ─────────────────────────────── */
 @media(max-width:1024px){
   section { padding:56px 4%; }
-  .hero-visual{width:420px;height:420px;}
-  .ring-deco.r2{width:380px;height:380px;}
+  .hero-visual{width:460px;height:460px;}
+  .ring-deco.r2{width:420px;height:420px;}
   @keyframes orbit-o{
-    from{transform:rotate(0deg) translateX(185px) rotate(0deg);}
-    to  {transform:rotate(360deg) translateX(185px) rotate(-360deg);}
+    from{transform:rotate(0deg) translateX(210px) rotate(0deg);}
+    to  {transform:rotate(360deg) translateX(210px) rotate(-360deg);}
   }
   .code-card-float{left:-10px;}
   .skills-grid   { grid-template-columns:repeat(3,1fr); }
@@ -914,7 +914,7 @@ footer{
 /* ── VS Code–style floating code card ───────────────────────── */
 .code-card-float {
   position:absolute; bottom:-10px; left:-40px;
-  width:268px; border-radius:10px;
+  width:292px; border-radius:10px;
   background:rgba(11,11,20,.98);
   border:1px solid rgba(99,102,241,.32);
   overflow:hidden;
@@ -976,7 +976,7 @@ footer{
 /* ── Cursor / Claude AI autocomplete widget ──────────────────── */
 .ai-suggest-card {
   position:absolute; top:20px; right:-30px;
-  width:202px; border-radius:10px;
+  width:222px; border-radius:10px;
   background:rgba(12,10,22,.98);
   border:1px solid rgba(168,85,247,.4);
   box-shadow:0 14px 48px rgba(0,0,0,.7), 0 0 32px rgba(124,58,237,.12),
@@ -1014,7 +1014,7 @@ footer{
 /* ── Terminal mini widget ────────────────────────────────────── */
 .terminal-mini {
   position:absolute; bottom:80px; right:-50px;
-  width:218px; border-radius:10px;
+  width:238px; border-radius:10px;
   background:rgba(6,6,13,.98);
   border:1px solid rgba(6,182,212,.3);
   box-shadow:0 14px 44px rgba(0,0,0,.7), 0 0 24px rgba(6,182,212,.07);
