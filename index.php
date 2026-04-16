@@ -895,8 +895,8 @@ footer{
     <div class="orbit-center">
       <div class="orbit-ping"></div>
       <div class="orbit-center-inner">
-        <!-- Replace with: <img src="assets/photo.jpg" alt="Yasir Arafat"/> -->
-        <i class="fa-solid fa-user avatar-ph"></i>
+        <img src="assets/photo.jpg" alt="Yasir Arafat" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <i class="fa-solid fa-user avatar-ph" style="display:none"></i>
       </div>
     </div>
 
@@ -962,20 +962,9 @@ footer{
   <div class="about-grid">
     <div class="about-img-wrap reveal">
       <div class="about-img-inner">
-        <!-- <img src="assets/about.jpg" alt="Yasir Arafat"/> -->
-        <div class="about-img-placeholder">
-          <svg width="56" height="56" viewBox="0 0 38 38" fill="none">
-            <defs><linearGradient id="lg-about" x1="0" y1="0" x2="38" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs>
-            <line x1="3" y1="29" x2="35" y2="29" stroke="url(#lg-about)" stroke-width="2.8" stroke-linecap="round"/>
-            <line x1="10" y1="29" x2="10" y2="13" stroke="url(#lg-about)" stroke-width="2.8" stroke-linecap="round"/>
-            <line x1="28" y1="29" x2="28" y2="13" stroke="url(#lg-about)" stroke-width="2.8" stroke-linecap="round"/>
-            <path d="M10 13 Q19 5 28 13" stroke="url(#lg-about)" stroke-width="2.8" stroke-linecap="round" fill="none"/>
-            <line x1="15" y1="29" x2="13.5" y2="18" stroke="url(#lg-about)" stroke-width="1.6" stroke-linecap="round" opacity=".75"/>
-            <line x1="19" y1="29" x2="19" y2="14.5" stroke="url(#lg-about)" stroke-width="1.6" stroke-linecap="round" opacity=".75"/>
-            <line x1="23" y1="29" x2="24.5" y2="18" stroke="url(#lg-about)" stroke-width="1.6" stroke-linecap="round" opacity=".75"/>
-            <circle cx="10" cy="13" r="3" fill="url(#lg-about)" opacity=".9"/>
-            <circle cx="28" cy="13" r="3" fill="url(#lg-about)" opacity=".9"/>
-          </svg>
+        <img src="assets/photo.jpg" alt="Yasir Arafat" style="width:100%;height:auto;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="about-img-placeholder" style="display:none">
+          <i class="fa-solid fa-user" style="font-size:4rem;color:var(--primary2)"></i>
           <span style="font-size:.95rem;font-weight:700;color:var(--text);">Yasir Arafat</span>
           <span style="font-size:.8rem;">WordPress & PHP Developer</span>
         </div>
@@ -1414,22 +1403,30 @@ window.addEventListener('scroll',()=>{
   const hb = document.getElementById('hamburger');
   const nl = document.querySelector('.nav-links');
   let open = false;
-  hb.addEventListener('click',()=>{
-    open = !open;
+
+  function closeMenu(){
+    open = false;
+    nl.removeAttribute('style'); // let CSS take over — never leave display:none as inline
+  }
+
+  function openMenu(){
+    open = true;
     Object.assign(nl.style,{
-      display: open ? 'flex' : 'none',
-      flexDirection:'column', position:'absolute',
-      top:'66px', left:'0', right:'0',
-      background:'var(--nav-bg)',
-      backdropFilter:'blur(22px)',
+      display:'flex', flexDirection:'column',
+      position:'absolute', top:'66px', left:'0', right:'0',
+      background:'var(--nav-bg)', backdropFilter:'blur(22px)',
       padding:'20px 5%', gap:'18px',
-      borderBottom:'1px solid var(--border)',
-      zIndex:'99',
+      borderBottom:'1px solid var(--border)', zIndex:'99',
     });
-  });
-  nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-    open=false; nl.style.display='none';
-  }));
+  }
+
+  hb.addEventListener('click', ()=>{ open ? closeMenu() : openMenu(); });
+
+  // Close when a link is clicked
+  nl.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  // Reset inline styles when viewport grows back to desktop width
+  window.addEventListener('resize', ()=>{ if(window.innerWidth > 640) closeMenu(); });
 })();
 </script>
 </body>
