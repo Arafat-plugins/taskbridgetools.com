@@ -174,6 +174,34 @@ nav {
 /* Kill old underline */
 .nav-links a::after { display:none !important; }
 
+/* ── Active nav link ────────────────────────────────────────── */
+.nav-links a.nav-active {
+  color:#fff;
+  background:linear-gradient(135deg,rgba(124,58,237,.55),rgba(59,130,246,.45));
+  box-shadow:0 0 0 1px rgba(124,58,237,.45), 0 4px 18px rgba(124,58,237,.25);
+  animation:navActivePop .3s cubic-bezier(.34,1.56,.64,1) both;
+}
+/* Keep amber tint for pricing when active */
+.nav-links a[href="#pricing"].nav-active {
+  background:linear-gradient(135deg,rgba(245,158,11,.4),rgba(245,158,11,.25));
+  box-shadow:0 0 0 1px rgba(245,158,11,.4), 0 4px 14px rgba(245,158,11,.2);
+  color:var(--amber);
+}
+@keyframes navActivePop {
+  0%  { transform:scale(.88); opacity:.4; }
+  100%{ transform:scale(1);   opacity:1;  }
+}
+/* Subtle pulsing glow while active */
+.nav-links a.nav-active::before {
+  content:''; position:absolute; inset:0; border-radius:8px;
+  background:inherit; filter:blur(8px); opacity:.35; z-index:-1;
+  animation:navGlow 2.5s ease-in-out infinite;
+}
+@keyframes navGlow {
+  0%,100%{ opacity:.2; transform:scale(1); }
+  50%    { opacity:.45; transform:scale(1.06); }
+}
+
 /* ── Nav right cluster ──────────────────────────────────────── */
 .nav-right { flex-shrink:0; display:flex; align-items:center; gap:8px; }
 
@@ -1927,6 +1955,47 @@ window.addEventListener('scroll',()=>{
   const scrolled = window.scrollY > 40;
   nav.style.boxShadow = scrolled ? '0 4px 30px rgba(0,0,0,.25)' : 'none';
 });
+
+/* ══════════════════════════════════════════════════════════════
+   SCROLL SPY — active nav link
+   ══════════════════════════════════════════════════════════════ */
+(function(){
+  const links   = document.querySelectorAll('.nav-links a[href^="#"]');
+  const NAV_H   = 70; // navbar height offset
+
+  // Map each link to its target section
+  const sections = Array.from(links).map(a => ({
+    link: a,
+    el  : document.querySelector(a.getAttribute('href'))
+  })).filter(o => o.el);
+
+  function setActive(id){
+    links.forEach(a => a.classList.remove('nav-active'));
+    const match = sections.find(o => o.el.id === id);
+    if(match) match.link.classList.add('nav-active');
+  }
+
+  function onScroll(){
+    const scrollY = window.scrollY + NAV_H + 60;
+    // Find the last section whose top is above current scroll position
+    let current = sections[0].el.id;
+    sections.forEach(({ el }) => {
+      if(el.offsetTop <= scrollY) current = el.id;
+    });
+    setActive(current);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll(); // run once on load
+
+  // Also set active immediately on link click (before scroll settles)
+  links.forEach(a => {
+    a.addEventListener('click', () => {
+      links.forEach(l => l.classList.remove('nav-active'));
+      a.classList.add('nav-active');
+    });
+  });
+})();
 
 /* ══════════════════════════════════════════════════════════════
    MOBILE HAMBURGER
