@@ -38,21 +38,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_submit'])) {
   --primary2: #a855f7;
   --accent:   #06b6d4;
   --accent2:  #3b82f6;
+  --amber:    #f59e0b;
+  --teal:     #4ec9b0;
 
   /* Dark theme defaults */
-  --bg:       #0a0a0f;
-  --bg2:      #111118;
-  --bg3:      #16161f;
+  --bg:       #07070e;
+  --bg2:      #0e0e1a;
+  --bg3:      #13131e;
   --card:     rgba(255,255,255,.042);
   --card2:    rgba(255,255,255,.07);
   --border:   rgba(255,255,255,.09);
   --text:     #e2e8f0;
   --muted:    #94a3b8;
-  --nav-bg:   rgba(10,10,15,.82);
+  --nav-bg:   rgba(7,7,14,.88);
   --input-bg: rgba(255,255,255,.05);
-  --shadow:   rgba(0,0,0,.45);
-  --grid-op:  .025;
-  --orb-op:   .55;
+  --shadow:   rgba(0,0,0,.55);
+  --grid-op:  .045;
+  --orb-op:   .62;
 }
 [data-theme="light"] {
   --bg:       #f4f4f8;
@@ -83,13 +85,11 @@ body {
 ::-webkit-scrollbar-track { background:var(--bg2); }
 ::-webkit-scrollbar-thumb { background:var(--primary); border-radius:99px; }
 
-/* ── Grid bg ───────────────────────────────────────────────── */
+/* ── Dot grid bg (VS Code style) ────────────────────────────── */
 body::after {
   content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
-  background-image:
-    linear-gradient(rgba(124,58,237,var(--grid-op)) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(124,58,237,var(--grid-op)) 1px, transparent 1px);
-  background-size:60px 60px;
+  background-image: radial-gradient(circle, rgba(124,58,237,var(--grid-op)) 1px, transparent 1px);
+  background-size:30px 30px;
   transition:opacity .35s;
 }
 
@@ -106,9 +106,10 @@ body::after {
   transition:opacity .35s;
   opacity:var(--orb-op);
 }
-.orb1 { width:550px;height:550px;background:rgba(124,58,237,.22);top:-180px;left:-180px;animation:floatOrb 13s ease-in-out infinite; }
-.orb2 { width:420px;height:420px;background:rgba(6,182,212,.14);bottom:-120px;right:-120px;animation:floatOrb 16s ease-in-out infinite reverse; }
-.orb3 { width:320px;height:320px;background:rgba(168,85,247,.1);top:42%;left:52%;animation:floatOrb 11s ease-in-out infinite 2s; }
+.orb1 { width:640px;height:640px;background:rgba(124,58,237,.28);top:-220px;left:-220px;animation:floatOrb 13s ease-in-out infinite; }
+.orb2 { width:480px;height:480px;background:rgba(6,182,212,.17);bottom:-150px;right:-150px;animation:floatOrb 16s ease-in-out infinite reverse; }
+.orb3 { width:360px;height:360px;background:rgba(168,85,247,.13);top:42%;left:50%;animation:floatOrb 11s ease-in-out infinite 2s; }
+.orb4 { width:280px;height:280px;background:rgba(245,158,11,.08);top:20%;right:6%;filter:blur(100px);animation:floatOrb 18s ease-in-out infinite 5s; }
 @keyframes floatOrb {
   0%,100%{transform:translate(0,0) scale(1)}
   33%{transform:translate(40px,-30px) scale(1.06)}
@@ -478,7 +479,7 @@ nav {
 /* ═══════════════════════════════════════════════════════════════
    SECTION BASE
    ═══════════════════════════════════════════════════════════════ */
-section { padding:90px 5%; position:relative; }
+section { padding:64px 5%; position:relative; }
 .section-label {
   display:inline-block;
   font-size:.73rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase;
@@ -491,12 +492,12 @@ section { padding:90px 5%; position:relative; }
   color:var(--text);
 }
 .section-sub { color:var(--muted); max-width:520px; font-size:.97rem; }
-.section-header { margin-bottom:56px; }
+.section-header { margin-bottom:36px; }
 
 /* ═══════════════════════════════════════════════════════════════
    ABOUT
    ═══════════════════════════════════════════════════════════════ */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center;max-width:1160px;margin:0 auto;}
 .about-img-wrap{
   position:relative;border-radius:24px;overflow:hidden;
   background:linear-gradient(135deg,var(--primary),var(--accent2));
@@ -534,7 +535,7 @@ section { padding:90px 5%; position:relative; }
    SKILLS
    ═══════════════════════════════════════════════════════════════ */
 #skills{background:linear-gradient(180deg,transparent,rgba(124,58,237,.04),transparent);}
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1160px;margin:0 auto;}
 .skill-card{
   padding:26px;border-radius:18px;
   background:var(--card);border:1px solid var(--border);
@@ -560,7 +561,7 @@ section { padding:90px 5%; position:relative; }
 /* ═══════════════════════════════════════════════════════════════
    SERVICES
    ═══════════════════════════════════════════════════════════════ */
-.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1160px;margin:0 auto;}
 .service-card{
   padding:32px 26px;border-radius:20px;
   background:var(--card);border:1px solid var(--border);
@@ -599,7 +600,7 @@ section { padding:90px 5%; position:relative; }
    WHY HIRE ME
    ═══════════════════════════════════════════════════════════════ */
 #why{background:linear-gradient(180deg,transparent,rgba(6,182,212,.04),transparent);}
-.why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px;}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:0 auto;}
 .why-card{
   padding:26px 20px;border-radius:16px;
   background:var(--card);border:1px solid var(--border);
@@ -613,7 +614,7 @@ section { padding:90px 5%; position:relative; }
   display:block;margin-bottom:4px;
 }
 .why-label{font-size:.82rem;font-weight:600;color:var(--muted);}
-.why-features{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:44px;}
+.why-features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px;max-width:1160px;margin-left:auto;margin-right:auto;}
 .why-feat{
   display:flex;align-items:flex-start;gap:14px;
   padding:18px;border-radius:13px;
@@ -630,7 +631,7 @@ section { padding:90px 5%; position:relative; }
 /* ═══════════════════════════════════════════════════════════════
    TECH STACK
    ═══════════════════════════════════════════════════════════════ */
-.tech-wrap{display:flex;flex-wrap:wrap;gap:10px;}
+.tech-wrap{display:flex;flex-wrap:wrap;gap:10px;max-width:1160px;margin:0 auto;}
 .tech-badge{
   display:inline-flex;align-items:center;gap:8px;
   padding:9px 16px;border-radius:11px;
@@ -664,7 +665,7 @@ section { padding:90px 5%; position:relative; }
    CONTACT
    ═══════════════════════════════════════════════════════════════ */
 #contact{background:linear-gradient(180deg,transparent,rgba(124,58,237,.05),transparent);}
-.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:start;}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start;max-width:1100px;margin:0 auto;}
 .contact-info h3{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:700;margin-bottom:18px;color:var(--text);}
 .contact-info p{color:var(--muted);margin-bottom:26px;}
 .contact-links{display:flex;flex-direction:column;gap:12px;}
@@ -753,17 +754,34 @@ footer{
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════════════════ */
+
+/* ── Large desktop (≤1280px) ────────────────────────────────── */
+@media(max-width:1280px){
+  .skills-grid   { grid-template-columns:repeat(3,1fr); }
+}
+
+/* ── Tablet landscape (≤1024px) ─────────────────────────────── */
 @media(max-width:1024px){
+  section { padding:56px 4%; }
   .hero-visual{width:420px;height:420px;}
   .ring-deco.r2{width:380px;height:380px;}
   @keyframes orbit-o{
     from{transform:rotate(0deg) translateX(185px) rotate(0deg);}
     to  {transform:rotate(360deg) translateX(185px) rotate(-360deg);}
   }
-  .avail-card,.ach-card{right:-10px;}
   .code-card-float{left:-10px;}
+  .skills-grid   { grid-template-columns:repeat(3,1fr); }
+  .services-grid { grid-template-columns:repeat(2,1fr); }
+  .why-features  { grid-template-columns:repeat(2,1fr); }
+  .about-grid    { gap:30px; }
+  .contact-grid  { gap:30px; }
 }
+
+/* ── Tablet portrait (≤860px) ───────────────────────────────── */
 @media(max-width:860px){
+  section { padding:52px 4%; }
+  .section-header { margin-bottom:28px; }
+  /* Hero — don't touch */
   .hero{flex-direction:column-reverse;text-align:center;padding-top:100px;gap:24px;}
   .hero-text{max-width:100%;}
   .hero-desc{max-width:100%;}
@@ -782,19 +800,310 @@ footer{
   }
   .orb-icon{width:38px;height:38px;margin:-19px;border-radius:10px;font-size:1rem;}
   .code-card-float{display:none;}
-  .ach-card{top:-10px;right:0;}
-  .avail-card{bottom:0;right:0;}
-  .about-grid,.contact-grid{grid-template-columns:1fr;}
-  .form-row{grid-template-columns:1fr;}
-  .process-steps::before{display:none;}
+  /* Grids */
+  .skills-grid   { grid-template-columns:repeat(2,1fr); gap:14px; }
+  .services-grid { grid-template-columns:repeat(2,1fr); gap:16px; }
+  .why-grid      { grid-template-columns:repeat(2,1fr); }
+  .why-features  { grid-template-columns:repeat(2,1fr); }
+  .about-grid,.contact-grid { grid-template-columns:1fr; gap:24px; }
+  .form-row      { grid-template-columns:1fr 1fr; }
+  .process-steps::before { display:none; }
+  .pricing-grid  { flex-direction:column; align-items:center; }
+  .pricing-card  { max-width:480px; width:100%; }
 }
-@media(max-width:640px){
-  nav{padding:13px 4%;}
+
+/* ── Mobile (≤600px) ────────────────────────────────────────── */
+@media(max-width:600px){
+  nav{padding:12px 4%;}
   .nav-links{display:none;}
   .hamburger{display:flex;}
-  section{padding:70px 4%;}
-  .contact-form{padding:22px;}
+  section { padding:44px 4%; }
+  .section-header { margin-bottom:24px; }
+  .contact-form{padding:20px;}
   .hero-visual{width:280px;height:280px;}
+  .skills-grid   { grid-template-columns:repeat(2,1fr); gap:12px; }
+  .services-grid { grid-template-columns:1fr; }
+  .why-grid      { grid-template-columns:repeat(2,1fr); }
+  .why-features  { grid-template-columns:1fr; }
+  .form-row      { grid-template-columns:1fr; }
+  .step { min-width:140px; padding:14px 10px; }
+}
+
+/* ── Small mobile (≤420px) ──────────────────────────────────── */
+@media(max-width:420px){
+  .skills-grid { grid-template-columns:1fr; }
+  .why-grid    { grid-template-columns:1fr; }
+  .hero-stats  { gap:18px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VS CODE / CURSOR / CLAUDE — DYNAMIC ENHANCEMENTS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Scan-line sweep ────────────────────────────────────────── */
+.scan-line {
+  position:fixed; left:0; right:0; height:1px; z-index:1; pointer-events:none;
+  background:linear-gradient(90deg,
+    transparent 0%, rgba(124,58,237,0) 12%,
+    rgba(99,102,241,.6) 38%, rgba(6,182,212,.8) 50%,
+    rgba(99,102,241,.6) 62%, rgba(124,58,237,0) 88%,
+    transparent 100%
+  );
+  box-shadow:0 0 10px rgba(6,182,212,.5), 0 0 30px rgba(124,58,237,.25);
+  animation:scanDown 9s linear infinite;
+}
+@keyframes scanDown {
+  0%  { top:-2px; opacity:0; }
+  4%  { opacity:1; }
+  88% { opacity:.7; }
+  100%{ top:100vh; opacity:0; }
+}
+[data-theme="light"] .scan-line { opacity:.35; }
+
+/* ── VS Code–style floating code card ───────────────────────── */
+.code-card-float {
+  position:absolute; bottom:-10px; left:-40px;
+  width:268px; border-radius:10px;
+  background:rgba(11,11,20,.98);
+  border:1px solid rgba(99,102,241,.32);
+  overflow:hidden;
+  box-shadow:0 24px 64px rgba(0,0,0,.8), 0 0 0 1px rgba(99,102,241,.1),
+             inset 0 1px 0 rgba(255,255,255,.04),
+             0 0 40px rgba(124,58,237,.08);
+  animation:floatCard 4s ease-in-out infinite;
+  backdrop-filter:blur(14px); z-index:10;
+}
+.cc-tabs {
+  display:flex; background:rgba(0,0,0,.4);
+  border-bottom:1px solid rgba(255,255,255,.06); padding:0;
+}
+.cc-tab {
+  display:flex; align-items:center; gap:5px;
+  padding:7px 12px; font-family:'Fira Code',monospace;
+  font-size:.58rem; color:rgba(255,255,255,.35);
+  border-right:1px solid rgba(255,255,255,.05); white-space:nowrap;
+}
+.cc-tab.active {
+  color:#9cdcfe; background:rgba(11,11,20,.98);
+  box-shadow:inset 0 1.5px 0 #7c3aed;
+}
+.cc-editor { display:flex; }
+.cc-gutter {
+  padding:10px 6px 10px 8px; text-align:right;
+  font-family:'Fira Code',monospace; font-size:.57rem;
+  color:rgba(255,255,255,.16); line-height:1.9;
+  min-width:28px; border-right:1px solid rgba(255,255,255,.04);
+  user-select:none; position:relative;
+}
+.cc-gutter .ln { display:block; position:relative; }
+.cc-gutter .ln.git-add { color:rgba(52,211,153,.7); }
+.cc-gutter .ln.git-mod { color:rgba(100,184,255,.6); }
+.cc-gutter .ln.git-add::before {
+  content:''; position:absolute; left:-7px; top:18%; width:3px; height:64%;
+  border-radius:0 2px 2px 0; background:rgba(52,211,153,.75);
+}
+.cc-gutter .ln.git-mod::before {
+  content:''; position:absolute; left:-7px; top:18%; width:3px; height:64%;
+  border-radius:0 2px 2px 0; background:rgba(100,184,255,.7);
+}
+.cc-code-body {
+  padding:10px 10px 10px 8px; font-family:'Fira Code',monospace;
+  font-size:.62rem; line-height:1.9; flex:1; overflow:hidden;
+}
+.cc-line { display:block; white-space:nowrap; }
+.cc-line.active-ln {
+  background:rgba(255,255,255,.04);
+  border-left:1.5px solid rgba(168,85,247,.5);
+  padding-left:4px; margin-left:-4px;
+}
+.cc-cursor {
+  display:inline-block; width:1.5px; height:.83em;
+  background:#aeafad; margin-left:.5px;
+  animation:blink .9s step-end infinite; vertical-align:middle;
+}
+
+/* ── Cursor / Claude AI autocomplete widget ──────────────────── */
+.ai-suggest-card {
+  position:absolute; top:20px; right:-30px;
+  width:202px; border-radius:10px;
+  background:rgba(12,10,22,.98);
+  border:1px solid rgba(168,85,247,.4);
+  box-shadow:0 14px 48px rgba(0,0,0,.7), 0 0 32px rgba(124,58,237,.12),
+             0 0 0 1px rgba(168,85,247,.1);
+  animation:floatCard 3.5s ease-in-out infinite .8s;
+  z-index:10; overflow:hidden;
+}
+.ai-suggest-hdr {
+  padding:7px 10px;
+  background:linear-gradient(90deg,rgba(124,58,237,.24),rgba(6,182,212,.14));
+  border-bottom:1px solid rgba(168,85,247,.22);
+  display:flex; align-items:center; gap:6px;
+  font-size:.59rem; font-weight:700; color:#a855f7;
+  font-family:'Fira Code',monospace;
+}
+.ai-suggest-row {
+  padding:7px 10px; display:flex; align-items:center;
+  justify-content:space-between;
+  font-family:'Fira Code',monospace; font-size:.62rem; color:#9cdcfe;
+  border-bottom:1px solid rgba(255,255,255,.04); cursor:default;
+}
+.ai-suggest-row.sel { background:rgba(99,102,241,.26); color:#fff; }
+.ai-stype {
+  font-size:.53rem; padding:1px 5px; border-radius:3px;
+  background:rgba(78,201,176,.1); border:1px solid rgba(78,201,176,.22);
+  color:#4ec9b0; flex-shrink:0;
+}
+.ai-suggest-footer {
+  padding:5px 9px; font-family:'Fira Code',monospace;
+  font-size:.54rem; color:rgba(255,255,255,.3);
+  display:flex; align-items:center; gap:4px;
+}
+.ai-spark { color:#a855f7; animation:pulse 1.5s ease-in-out infinite; }
+
+/* ── Terminal mini widget ────────────────────────────────────── */
+.terminal-mini {
+  position:absolute; bottom:80px; right:-50px;
+  width:218px; border-radius:10px;
+  background:rgba(6,6,13,.98);
+  border:1px solid rgba(6,182,212,.3);
+  box-shadow:0 14px 44px rgba(0,0,0,.7), 0 0 24px rgba(6,182,212,.07);
+  animation:floatCard 4.5s ease-in-out infinite 2s; z-index:10; overflow:hidden;
+}
+.terminal-header {
+  display:flex; align-items:center; gap:6px; padding:7px 11px;
+  background:rgba(255,255,255,.03);
+  border-bottom:1px solid rgba(6,182,212,.13);
+}
+.terminal-title {
+  font-family:'Fira Code',monospace; font-size:.57rem;
+  color:rgba(255,255,255,.32); margin-left:4px;
+}
+.terminal-body {
+  padding:9px 11px; font-family:'Fira Code',monospace;
+  font-size:.61rem; line-height:2;
+}
+.t-prompt { color:#4ec9b0; }
+.t-cmd { color:#9cdcfe; }
+.t-output { color:rgba(255,255,255,.44); }
+.t-cursor-block {
+  display:inline-block; width:6px; height:.75em;
+  background:#4ec9b0; margin-left:2px;
+  animation:blink .9s step-end infinite; vertical-align:middle;
+}
+
+/* ── VS Code status bar (page bottom) ───────────────────────── */
+.vscode-statusbar {
+  position:fixed; bottom:0; left:0; right:0; height:22px; z-index:300;
+  background:linear-gradient(90deg,rgba(110,47,216,.92),rgba(59,130,246,.82),rgba(6,182,212,.78));
+  backdrop-filter:blur(18px);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 14px;
+  font-family:'Fira Code',monospace; font-size:.61rem;
+  color:rgba(255,255,255,.9);
+  border-top:1px solid rgba(255,255,255,.1);
+  user-select:none;
+}
+.sb-left,.sb-right { display:flex; align-items:center; }
+.sb-item {
+  display:flex; align-items:center; gap:4px;
+  padding:0 8px; height:22px; cursor:default;
+  transition:background .18s; white-space:nowrap;
+}
+.sb-item:hover { background:rgba(255,255,255,.15); }
+.sb-sep { width:1px; height:14px; background:rgba(255,255,255,.14); margin:0 2px; }
+.sb-dot { width:6px;height:6px;border-radius:50%;background:#34d399;
+  box-shadow:0 0 6px #34d399;animation:pulse 1.5s ease-in-out infinite; }
+[data-theme="light"] .vscode-statusbar {
+  background:linear-gradient(90deg,rgba(110,47,216,.94),rgba(59,130,246,.9));
+}
+
+/* ── Section header max-width constraint ─────────────────────── */
+.section-header { max-width:1160px; margin-left:auto; margin-right:auto; }
+
+/* ── Process section alignment fix ─────────────────────────── */
+#process .section-header { text-align:center; }
+#process .section-header .section-sub { margin:0 auto; }
+#pricing .section-header .section-sub { margin:0 auto; }
+.process-steps { justify-content:center; max-width:1160px; margin:0 auto; }
+/* Connector line — height corrected to pass through circle centers */
+/* step padding-top(18) + circle-half(34) = 52px */
+.process-steps::before { top:52px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   PRICING
+   ═══════════════════════════════════════════════════════════════ */
+#pricing { background:linear-gradient(180deg,transparent,rgba(124,58,237,.05),transparent); }
+#pricing .section-header { text-align:center; }
+#pricing .section-header .section-sub { margin:0 auto; }
+.pricing-grid {
+  display:flex; gap:22px; justify-content:center; align-items:stretch;
+  flex-wrap:wrap; max-width:980px; margin:0 auto;
+}
+.pricing-card {
+  flex:1; min-width:255px; max-width:310px;
+  padding:32px 24px; border-radius:22px;
+  background:var(--card); border:1px solid var(--border);
+  display:flex; flex-direction:column;
+  position:relative; overflow:hidden; transition:all .35s;
+}
+.pricing-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(124,58,237,.15); border-color:rgba(124,58,237,.3); }
+.pricing-card.featured {
+  background:var(--card2);
+  border:1px solid rgba(124,58,237,.45);
+  box-shadow:0 12px 50px rgba(124,58,237,.22), 0 0 0 1px rgba(124,58,237,.14);
+}
+.pricing-card.featured::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+}
+.pricing-badge {
+  position:absolute; top:16px; right:16px;
+  padding:3px 11px; border-radius:50px;
+  background:linear-gradient(135deg,var(--primary),var(--accent2));
+  font-size:.65rem; font-weight:800; color:#fff;
+  box-shadow:0 4px 14px rgba(124,58,237,.35);
+}
+.pricing-plan {
+  font-size:.7rem; font-weight:800; text-transform:uppercase;
+  letter-spacing:.12em; color:var(--primary2); margin-bottom:16px;
+}
+.pricing-price { display:flex; align-items:flex-end; gap:3px; margin-bottom:4px; }
+.pricing-cur { font-size:1.3rem; font-weight:700; color:var(--text); line-height:1.9; }
+.pricing-amount {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:3rem; font-weight:900; line-height:1;
+  background:linear-gradient(135deg,var(--text),var(--primary2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.pricing-period { font-size:.78rem; color:var(--muted); margin-bottom:4px; }
+.pricing-desc { font-size:.84rem; color:var(--muted); margin-bottom:22px; }
+.pricing-hr { height:1px; background:var(--border); margin-bottom:18px; }
+.pricing-feats { list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:26px; flex:1; }
+.pricing-feats li { display:flex; align-items:center; gap:9px; font-size:.84rem; color:var(--text); }
+.pricing-feats li i { color:#34d399; font-size:.78rem; flex-shrink:0; }
+.pricing-feats li.muted i { color:var(--muted); }
+.pricing-feats li.muted { color:var(--muted); }
+.pricing-note {
+  font-size:.7rem; color:var(--muted); text-align:center;
+  margin-top:14px; padding-top:12px; border-top:1px solid var(--border);
+  line-height:1.6;
+}
+.pricing-note strong { color:var(--primary2); }
+@media(max-width:860px){ .pricing-card { max-width:100%; } }
+
+/* Body padding for status bar */
+body { padding-bottom:22px; }
+footer { padding-bottom:54px !important; }
+
+/* Responsive: hide extra floating cards on small screens */
+@media(max-width:860px){
+  .ai-suggest-card { display:none; }
+  .terminal-mini { right:-10px; }
+}
+@media(max-width:640px){
+  .terminal-mini { display:none; }
+  .scan-line { display:none; }
+  .vscode-statusbar { display:none; }
 }
 </style>
 </head>
@@ -804,6 +1113,8 @@ footer{
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
+<div class="orb orb4"></div>
+<div class="scan-line"></div>
 
 <div class="wrapper">
 
@@ -847,6 +1158,7 @@ footer{
     <li><a href="#skills">Skills</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#why">Why Me</a></li>
+    <li><a href="#pricing">Pricing</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 
@@ -915,38 +1227,71 @@ footer{
     <div class="orb-icon oo5"><i class="fa-brands fa-github"></i></div>
     <div class="orb-icon oo6"><i class="fa-solid fa-bolt"></i></div>
 
-    <!-- Floating code card -->
+    <!-- VS Code–style code card -->
     <div class="code-card-float">
-      <div class="cc-header">
+      <div class="cc-tabs">
+        <div class="cc-tab active">
+          <i class="fa-brands fa-php" style="color:#8892bf;font-size:.56rem"></i>
+          portfolio.php
+        </div>
+      </div>
+      <div class="cc-editor">
+        <div class="cc-gutter">
+          <span class="ln git-add">1</span>
+          <span class="ln git-add">2</span>
+          <span class="ln git-mod">3</span>
+          <span class="ln">4</span>
+          <span class="ln git-add">5</span>
+          <span class="ln">6</span>
+          <span class="ln">7</span>
+          <span class="ln">8</span>
+        </div>
+        <div class="cc-code-body">
+          <span class="cc-line"><span class="kw">class</span> <span class="cls">Developer</span> <span class="op">{</span></span>
+          <span class="cc-line active-ln">&nbsp; <span class="kw">public</span> $name <span class="op">=</span> <span class="str">"Yasir"</span><span class="op">;</span></span>
+          <span class="cc-line">&nbsp; <span class="kw">public</span> $exp &nbsp;<span class="op">=</span> <span class="str">"5yrs"</span><span class="op">;</span></span>
+          <span class="cc-line">&nbsp;</span>
+          <span class="cc-line">&nbsp; <span class="kw">function</span> <span class="fn">build</span><span class="op">(</span>$p<span class="op">)</span> <span class="op">{</span></span>
+          <span class="cc-line">&nbsp;&nbsp;&nbsp; <span class="cm">// magic ✨</span></span>
+          <span class="cc-line">&nbsp;&nbsp;&nbsp; <span class="kw">return</span> <span class="str">"🚀"</span><span class="op">;</span><span class="cc-cursor"></span></span>
+          <span class="cc-line">&nbsp; <span class="op">}</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cursor / Claude AI autocomplete widget -->
+    <div class="ai-suggest-card">
+      <div class="ai-suggest-hdr">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> AI Suggest
+      </div>
+      <div class="ai-suggest-row sel">
+        <span>buildPlugin()</span><span class="ai-stype">fn</span>
+      </div>
+      <div class="ai-suggest-row">
+        <span>deployTheme()</span><span class="ai-stype">fn</span>
+      </div>
+      <div class="ai-suggest-row">
+        <span>$apiClient</span><span class="ai-stype">var</span>
+      </div>
+      <div class="ai-suggest-footer">
+        <i class="fa-solid fa-bolt ai-spark"></i>
+        ★ Top Rated · 5yr exp
+      </div>
+    </div>
+
+    <!-- Terminal mini widget -->
+    <div class="terminal-mini">
+      <div class="terminal-header">
         <span class="cc-dot" style="background:#ff5f57"></span>
         <span class="cc-dot" style="background:#febc2e"></span>
         <span class="cc-dot" style="background:#28c840"></span>
-        <span class="cc-filename">portfolio.php</span>
+        <span class="terminal-title">zsh — taskbridge</span>
       </div>
-      <div class="cc-body">
-        <span class="cl"><span class="kw">class</span> <span class="cls">Developer</span> <span class="op">{</span></span>
-        <span class="cl">&nbsp; <span class="kw">public</span> $name <span class="op">=</span> <span class="str">"Yasir"</span><span class="op">;</span></span>
-        <span class="cl">&nbsp; <span class="kw">public</span> $exp &nbsp;<span class="op">=</span> <span class="str">"5 years"</span><span class="op">;</span></span>
-        <span class="cl">&nbsp;</span>
-        <span class="cl">&nbsp; <span class="kw">function</span> <span class="fn">build</span><span class="op">(</span>$project<span class="op">)</span> <span class="op">{</span></span>
-        <span class="cl">&nbsp;&nbsp;&nbsp; <span class="cm">// magic happens here</span></span>
-        <span class="cl">&nbsp;&nbsp;&nbsp; <span class="kw">return</span> <span class="str">"🚀 Delivered!"</span><span class="op">;</span></span>
-        <span class="cl">&nbsp; <span class="op">}</span></span>
-        <span class="cl"><span class="op">}</span></span>
+      <div class="terminal-body">
+        <div><span class="t-prompt">➜</span> <span class="t-cmd" id="t-cmd"></span><span class="t-cursor-block"></span></div>
+        <div class="t-output" id="t-output"></div>
+        <div style="color:#34d399;margin-top:5px;font-size:.58rem;font-family:'Fira Code',monospace">● Open to Work</div>
       </div>
-    </div>
-
-    <!-- Floating achievement card -->
-    <div class="ach-card">
-      <div class="ach-stars">★★★★★</div>
-      <div class="ach-label">Top Rated Dev</div>
-      <div class="ach-sub">Upwork · Fiverr</div>
-    </div>
-
-    <!-- Floating availability badge -->
-    <div class="avail-card">
-      <span class="avail-dot"></span>
-      <span class="avail-text">Open to Work</span>
     </div>
 
   </div><!-- /hero-visual -->
@@ -1143,6 +1488,82 @@ footer{
   </div>
 </section>
 
+<!-- ═══ PRICING ═══════════════════════════════════════════════ -->
+<section id="pricing">
+  <div class="section-header reveal">
+    <span class="section-label">Pricing</span>
+    <h2 class="section-title">Simple, Transparent Rates</h2>
+    <p class="section-sub">No hidden fees. You pay only for actual hours worked — tracked and reported clearly.</p>
+  </div>
+
+  <div class="pricing-grid reveal">
+
+    <!-- Quick Fix -->
+    <div class="pricing-card">
+      <div class="pricing-plan">Quick Fix</div>
+      <div class="pricing-price">
+        <span class="pricing-cur">$</span>
+        <span class="pricing-amount">10</span>
+      </div>
+      <div class="pricing-period">/ hour &nbsp;·&nbsp; est. 1–5 hrs</div>
+      <p class="pricing-desc">Small tasks, bug fixes, and minor customizations.</p>
+      <div class="pricing-hr"></div>
+      <ul class="pricing-feats">
+        <li><i class="fa-solid fa-check"></i> WordPress bug fixes</li>
+        <li><i class="fa-solid fa-check"></i> Theme tweaks & CSS fixes</li>
+        <li><i class="fa-solid fa-check"></i> Plugin configuration</li>
+        <li><i class="fa-solid fa-check"></i> Speed / error diagnosis</li>
+        <li class="muted"><i class="fa-solid fa-minus"></i> Large builds</li>
+      </ul>
+      <a href="#contact" class="btn-outline" style="justify-content:center">Get a Quote</a>
+    </div>
+
+    <!-- Hourly — Featured -->
+    <div class="pricing-card featured">
+      <span class="pricing-badge">Best Value</span>
+      <div class="pricing-plan">Hourly Rate</div>
+      <div class="pricing-price">
+        <span class="pricing-cur">$</span>
+        <span class="pricing-amount">10</span>
+      </div>
+      <div class="pricing-period">/ hour &nbsp;·&nbsp; any project size</div>
+      <p class="pricing-desc">Pay only for hours worked — full transparency, zero waste.</p>
+      <div class="pricing-hr"></div>
+      <ul class="pricing-feats">
+        <li><i class="fa-solid fa-check"></i> Custom plugin development</li>
+        <li><i class="fa-solid fa-check"></i> WordPress theme from scratch</li>
+        <li><i class="fa-solid fa-check"></i> PHP & REST API work</li>
+        <li><i class="fa-solid fa-check"></i> AI & automation integration</li>
+        <li><i class="fa-solid fa-check"></i> Direct chat (WhatsApp / Email)</li>
+        <li><i class="fa-solid fa-check"></i> Revisions included</li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="justify-content:center">Hire Me Now</a>
+      <div class="pricing-note">Hours tracked & reported. You only pay for <strong>real work done</strong>.</div>
+    </div>
+
+    <!-- Full Project -->
+    <div class="pricing-card">
+      <div class="pricing-plan">Full Project</div>
+      <div class="pricing-price">
+        <span class="pricing-cur">$</span>
+        <span class="pricing-amount">10</span>
+      </div>
+      <div class="pricing-period">/ hour &nbsp;·&nbsp; est. 10–40 hrs</div>
+      <p class="pricing-desc">End-to-end builds: plugins, themes, and custom web apps.</p>
+      <div class="pricing-hr"></div>
+      <ul class="pricing-feats">
+        <li><i class="fa-solid fa-check"></i> Full plugin or theme build</li>
+        <li><i class="fa-solid fa-check"></i> WooCommerce & API integration</li>
+        <li><i class="fa-solid fa-check"></i> AJAX-powered interfaces</li>
+        <li><i class="fa-solid fa-check"></i> Code documentation & handoff</li>
+        <li><i class="fa-solid fa-check"></i> Post-delivery support</li>
+      </ul>
+      <a href="#contact" class="btn-outline" style="justify-content:center">Discuss Project</a>
+    </div>
+
+  </div>
+</section>
+
 <!-- ═══ CONTACT ═══════════════════════════════════════════════ -->
 <section id="contact">
   <div class="section-header reveal">
@@ -1239,62 +1660,118 @@ footer{
 
 </div><!-- /wrapper -->
 
+<!-- VS Code Status Bar -->
+<div class="vscode-statusbar" id="vscode-statusbar">
+  <div class="sb-left">
+    <div class="sb-item"><i class="fa-brands fa-git-alt"></i>&nbsp;main</div>
+    <div class="sb-sep"></div>
+    <div class="sb-item"><i class="fa-solid fa-circle-check" style="color:#34d399"></i>&nbsp;0 errors</div>
+    <div class="sb-item"><i class="fa-solid fa-triangle-exclamation" style="color:#fbbf24"></i>&nbsp;0 warnings</div>
+  </div>
+  <div class="sb-right">
+    <div class="sb-item"><span class="sb-dot"></span>&nbsp;Open to Work</div>
+    <div class="sb-sep"></div>
+    <div class="sb-item">PHP 8.2</div>
+    <div class="sb-item">UTF-8</div>
+    <div class="sb-item">TaskBridge</div>
+  </div>
+</div>
+
 <script>
 /* ══════════════════════════════════════════════════════════════
-   PARTICLES
+   CODE-CHARACTER PARTICLES  (VS Code / Cursor aesthetic)
    ══════════════════════════════════════════════════════════════ */
 (function(){
   const canvas = document.getElementById('particles-canvas');
   const ctx    = canvas.getContext('2d');
   let W, H, particles = [];
 
-  function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
-  resize(); window.addEventListener('resize', resize);
+  const TOKENS = [
+    '$', '{}', '()', '=>', ';', '//', '[]', '&&',
+    '??', '::', '++', 'fn', 'AI', '@', '!=',
+    'PHP', 'API', '</>','var','let',
+  ];
+  const PALETTES = [
+    [168,85,247],   // purple
+    [6,182,212],    // cyan
+    [99,102,241],   // indigo
+    [78,201,176],   // teal
+    [156,220,254],  // vscode blue
+    [245,158,11],   // amber (Claude)
+  ];
 
-  class P {
-    constructor(){
-      this.reset();
-    }
-    reset(){
-      this.x = Math.random()*W; this.y = Math.random()*H;
-      this.r = Math.random()*1.4+.3;
-      this.vx = (Math.random()-.5)*.3; this.vy = (Math.random()-.5)*.3;
-      this.a  = Math.random()*.5+.1;
-      this.hue = Math.random()>.5 ? 270 : 195;
-    }
-    draw(){
-      ctx.save(); ctx.globalAlpha = this.a;
-      ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
-      ctx.fillStyle = `hsl(${this.hue},70%,65%)`; ctx.fill(); ctx.restore();
+  function resize(){
+    W = canvas.width  = innerWidth;
+    H = canvas.height = innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', ()=>{ resize(); initParticles(); });
+
+  class Particle {
+    constructor(init){ this.reset(init); }
+    reset(init){
+      this.x     = Math.random()*W;
+      this.y     = init ? Math.random()*H : H + 16;
+      this.token = TOKENS[Math.floor(Math.random()*TOKENS.length)];
+      this.rgb   = PALETTES[Math.floor(Math.random()*PALETTES.length)];
+      this.speed = Math.random()*.35 + .06;
+      this.drift = (Math.random()-.5)*.14;
+      this.alpha = Math.random()*.2 + .05;
+      this.size  = Math.random()*2.5 + 8;
     }
     update(){
-      this.x += this.vx; this.y += this.vy;
-      if(this.x<0)this.x=W; if(this.x>W)this.x=0;
-      if(this.y<0)this.y=H; if(this.y>H)this.y=0;
+      this.y -= this.speed;
+      this.x += this.drift;
+      if(this.x < -30)  this.x = W + 20;
+      if(this.x > W+30) this.x = -20;
+      if(this.y < -20)  this.reset(false);
+    }
+    draw(){
+      ctx.save();
+      ctx.globalAlpha = this.alpha;
+      ctx.fillStyle   = `rgba(${this.rgb[0]},${this.rgb[1]},${this.rgb[2]},1)`;
+      ctx.font        = `${this.size}px 'Fira Code',monospace`;
+      ctx.fillText(this.token, this.x, this.y);
+      ctx.restore();
     }
   }
 
-  const count = Math.min(130, Math.floor(W*H/7000));
-  for(let i=0;i<count;i++) particles.push(new P());
+  function initParticles(){
+    const count = Math.min(75, Math.floor(W*H/14000));
+    particles = [];
+    for(let i=0; i<count; i++) particles.push(new Particle(true));
+  }
+  initParticles();
 
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
-        const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
-        const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<110){
-          ctx.save(); ctx.globalAlpha=(1-d/110)*.1;
-          ctx.strokeStyle='hsl(270,70%,65%)'; ctx.lineWidth=.5;
-          ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y);
-          ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); ctx.restore();
+  function drawConnections(){
+    for(let i=0; i<particles.length; i++){
+      for(let j=i+1; j<particles.length; j++){
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if(d < 120){
+          const a = (1 - d/120) * .08;
+          ctx.save();
+          ctx.globalAlpha = a;
+          ctx.strokeStyle = 'rgba(124,58,237,1)';
+          ctx.lineWidth   = .6;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+          ctx.restore();
         }
       }
-      particles[i].draw(); particles[i].update();
     }
-    requestAnimationFrame(draw);
   }
-  draw();
+
+  function animate(){
+    ctx.clearRect(0,0,W,H);
+    drawConnections();
+    particles.forEach(p=>{ p.update(); p.draw(); });
+    requestAnimationFrame(animate);
+  }
+  animate();
 })();
 
 /* ══════════════════════════════════════════════════════════════
@@ -1427,6 +1904,42 @@ window.addEventListener('scroll',()=>{
 
   // Reset inline styles when viewport grows back to desktop width
   window.addEventListener('resize', ()=>{ if(window.innerWidth > 640) closeMenu(); });
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   TERMINAL ANIMATION
+   ══════════════════════════════════════════════════════════════ */
+(function(){
+  const cmdEl = document.getElementById('t-cmd');
+  const outEl = document.getElementById('t-output');
+  if(!cmdEl) return;
+
+  const cmds = [
+    { cmd:'php build --prod',    out:'✓ Build complete (1.2s)' },
+    { cmd:'git push origin main',out:'✓ Pushed 3 commits' },
+    { cmd:'wp plugin activate',  out:'✓ Plugin active' },
+    { cmd:'npm run deploy',      out:'✓ Deployed successfully' },
+    { cmd:'curl -s api/test',    out:'✓ API 200 OK' },
+  ];
+
+  let ci=0, ch=0, phase=0; // phase 0=typing, 1=output, 2=pause
+
+  function tick(){
+    const {cmd, out} = cmds[ci];
+    if(phase === 0){
+      cmdEl.textContent = cmd.slice(0, ++ch);
+      if(ch >= cmd.length){ phase=1; setTimeout(tick, 500); return; }
+      setTimeout(tick, 55 + Math.random()*30);
+    } else if(phase === 1){
+      outEl.textContent = out;
+      phase=2; setTimeout(tick, 2200);
+    } else {
+      cmdEl.textContent = ''; outEl.textContent = '';
+      ch=0; phase=0; ci=(ci+1)%cmds.length;
+      setTimeout(tick, 350);
+    }
+  }
+  setTimeout(tick, 1200);
 })();
 </script>
 </body>
