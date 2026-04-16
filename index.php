@@ -25,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_submit'])) {
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Yasir Arafat — WordPress & PHP Expert | TaskBridge Tools</title>
 <meta name="description" content="Expert WordPress Plugin & Theme Developer. Custom PHP, JavaScript, AJAX, AI Integration. Hire on Upwork or Fiverr."/>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+<link rel="shortcut icon" href="assets/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
