@@ -143,55 +143,96 @@ body::after {
    ═══════════════════════════════════════════════════════════════ */
 nav {
   position:fixed; top:0; width:100%; z-index:100;
-  padding:14px 5%;
-  display:flex; align-items:center; justify-content:space-between;
+  padding:0 4%; height:62px;
+  display:flex; align-items:center; gap:0;
   background:var(--nav-bg);
-  backdrop-filter:blur(22px);
+  backdrop-filter:blur(24px) saturate(160%);
   border-bottom:1px solid var(--border);
   transition:background .3s, border-color .3s;
 }
-.nav-links { display:flex; gap:30px; list-style:none; }
+.logo-wrap { flex-shrink:0; }
+
+/* ── Nav links — truly centered in the middle ───────────────── */
+.nav-links {
+  flex:1; display:flex; gap:2px; list-style:none;
+  justify-content:center; align-items:center;
+}
 .nav-links a {
   color:var(--muted); text-decoration:none;
-  font-size:.88rem; font-weight:500;
-  transition:color .25s; position:relative;
+  font-size:.82rem; font-weight:500;
+  padding:6px 12px; border-radius:8px;
+  transition:color .2s, background .2s;
+  white-space:nowrap; position:relative;
 }
-.nav-links a::after {
-  content:''; position:absolute; left:0; bottom:-4px;
-  width:0; height:2px;
-  background:linear-gradient(90deg,var(--primary),var(--accent));
-  border-radius:99px; transition:width .3s;
+.nav-links a:hover {
+  color:var(--text);
+  background:rgba(124,58,237,.1);
 }
-.nav-links a:hover { color:var(--text); }
-.nav-links a:hover::after { width:100%; }
-.nav-right { display:flex; align-items:center; gap:12px; }
+/* Pricing link in center menu — amber */
+.nav-links a[href="#pricing"] { color:var(--amber); }
+.nav-links a[href="#pricing"]:hover { background:rgba(245,158,11,.1); }
+/* Kill old underline */
+.nav-links a::after { display:none !important; }
+
+/* ── Nav right cluster ──────────────────────────────────────── */
+.nav-right { flex-shrink:0; display:flex; align-items:center; gap:8px; }
+
+/* Pricing CTA button in nav-right */
+.nav-pricing-btn {
+  padding:7px 16px; border-radius:50px;
+  border:1.5px solid rgba(245,158,11,.45);
+  background:rgba(245,158,11,.08);
+  color:var(--amber) !important; font-weight:700; font-size:.78rem;
+  text-decoration:none; white-space:nowrap;
+  transition:all .25s;
+}
+.nav-pricing-btn:hover {
+  background:rgba(245,158,11,.18);
+  border-color:rgba(245,158,11,.8);
+  transform:translateY(-1px);
+  box-shadow:0 4px 18px rgba(245,158,11,.2);
+}
+.nav-pricing-btn::after { display:none !important; }
 
 /* Theme toggle */
 #theme-toggle {
-  width:42px; height:42px; border-radius:50%;
+  width:36px; height:36px; border-radius:50%;
   border:1px solid var(--border);
   background:var(--card); cursor:pointer;
   display:flex; align-items:center; justify-content:center;
-  font-size:1rem; transition:all .3s; color:var(--text);
-  backdrop-filter:blur(10px);
+  font-size:.88rem; transition:all .3s; color:var(--text);
+  backdrop-filter:blur(10px); flex-shrink:0;
 }
 #theme-toggle:hover {
   border-color:var(--primary2);
   background:rgba(124,58,237,.15);
-  transform:rotate(15deg) scale(1.08);
+  transform:rotate(20deg) scale(1.1);
 }
+
+/* Hire Me — shine-sweep CTA */
 .nav-cta {
-  padding:9px 22px; border-radius:50px;
+  padding:8px 22px; border-radius:50px;
   background:linear-gradient(135deg,var(--primary),var(--accent2));
-  color:#fff !important; font-weight:700; font-size:.85rem;
+  color:#fff !important; font-weight:700; font-size:.82rem;
   text-decoration:none;
-  box-shadow:0 4px 20px rgba(124,58,237,.35);
+  box-shadow:0 4px 18px rgba(124,58,237,.35);
   transition:transform .2s, box-shadow .2s;
+  position:relative; overflow:hidden; white-space:nowrap;
 }
-.nav-cta:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(124,58,237,.55); }
+/* shine sweep */
+.nav-cta::before {
+  content:''; position:absolute; top:0; left:-80%;
+  width:55%; height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+  transform:skewX(-15deg);
+  transition:left .55s ease;
+}
+.nav-cta:hover::before { left:145%; }
+.nav-cta:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(124,58,237,.58); }
 .nav-cta::after { display:none !important; }
-.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
-.hamburger span { width:24px;height:2px;background:var(--text);border-radius:99px;transition:.3s; }
+
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; flex-shrink:0; }
+.hamburger span { width:22px;height:2px;background:var(--text);border-radius:99px;transition:.3s; }
 
 /* ═══════════════════════════════════════════════════════════════
    HERO
@@ -1089,6 +1130,20 @@ footer{
   line-height:1.6;
 }
 .pricing-note strong { color:var(--primary2); }
+/* Custom quote display */
+.pricing-custom {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:2.4rem; font-weight:900; line-height:1.1;
+  background:linear-gradient(135deg,var(--primary2),var(--accent));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:6px;
+}
+/* Price range suffix ($10–40) */
+.pricing-range {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.4rem; font-weight:700; color:var(--muted);
+  line-height:1.7; margin-bottom:3px;
+}
 @media(max-width:860px){ .pricing-card { max-width:100%; } }
 
 /* Body padding for status bar */
@@ -1099,6 +1154,7 @@ footer { padding-bottom:54px !important; }
 @media(max-width:860px){
   .ai-suggest-card { display:none; }
   .terminal-mini { right:-10px; }
+  .nav-pricing-btn { display:none; } /* nav links handle pricing on tablet */
 }
 @media(max-width:640px){
   .terminal-mini { display:none; }
@@ -1163,8 +1219,9 @@ footer { padding-bottom:54px !important; }
   </ul>
 
   <div class="nav-right">
+    <a href="#pricing" class="nav-pricing-btn">$ Pricing</a>
     <button id="theme-toggle" title="Toggle light/dark mode">🌙</button>
-    <a href="#contact" class="nav-cta">Hire Me</a>
+    <a href="#contact" class="nav-cta">✦ Hire Me</a>
   </div>
 
   <div class="hamburger" id="hamburger">
@@ -1501,12 +1558,13 @@ footer { padding-bottom:54px !important; }
     <!-- Quick Fix -->
     <div class="pricing-card">
       <div class="pricing-plan">Quick Fix</div>
-      <div class="pricing-price">
+      <div class="pricing-price" style="align-items:flex-end;gap:2px">
         <span class="pricing-cur">$</span>
         <span class="pricing-amount">10</span>
+        <span class="pricing-range">–40</span>
       </div>
-      <div class="pricing-period">/ hour &nbsp;·&nbsp; est. 1–5 hrs</div>
-      <p class="pricing-desc">Small tasks, bug fixes, and minor customizations.</p>
+      <div class="pricing-period">flat estimate &nbsp;·&nbsp; small tasks</div>
+      <p class="pricing-desc">Bug fixes and minor tweaks at a flat agreed rate — no surprise bills.</p>
       <div class="pricing-hr"></div>
       <ul class="pricing-feats">
         <li><i class="fa-solid fa-check"></i> WordPress bug fixes</li>
@@ -1541,24 +1599,22 @@ footer { padding-bottom:54px !important; }
       <div class="pricing-note">Hours tracked & reported. You only pay for <strong>real work done</strong>.</div>
     </div>
 
-    <!-- Full Project -->
+    <!-- Full Project — Custom Quote -->
     <div class="pricing-card">
       <div class="pricing-plan">Full Project</div>
-      <div class="pricing-price">
-        <span class="pricing-cur">$</span>
-        <span class="pricing-amount">10</span>
-      </div>
-      <div class="pricing-period">/ hour &nbsp;·&nbsp; est. 10–40 hrs</div>
-      <p class="pricing-desc">End-to-end builds: plugins, themes, and custom web apps.</p>
+      <div class="pricing-custom">Custom<br>Quote</div>
+      <div class="pricing-period">Scope discussed first — no upfront price</div>
+      <p class="pricing-desc">Full website builds, multilingual sites, hosting management — price depends on complexity.</p>
       <div class="pricing-hr"></div>
       <ul class="pricing-feats">
-        <li><i class="fa-solid fa-check"></i> Full plugin or theme build</li>
-        <li><i class="fa-solid fa-check"></i> WooCommerce & API integration</li>
-        <li><i class="fa-solid fa-check"></i> AJAX-powered interfaces</li>
-        <li><i class="fa-solid fa-check"></i> Code documentation & handoff</li>
-        <li><i class="fa-solid fa-check"></i> Post-delivery support</li>
+        <li><i class="fa-solid fa-check"></i> Full website / plugin build</li>
+        <li><i class="fa-solid fa-check"></i> Multilingual (WPML / Polylang)</li>
+        <li><i class="fa-solid fa-check"></i> Hosting setup & management</li>
+        <li><i class="fa-solid fa-check"></i> WooCommerce & payment setup</li>
+        <li><i class="fa-solid fa-check"></i> Price agreed before work starts</li>
       </ul>
-      <a href="#contact" class="btn-outline" style="justify-content:center">Discuss Project</a>
+      <a href="#contact" class="btn-outline" style="justify-content:center">Let's Discuss</a>
+      <div class="pricing-note"><strong>No fixed price</strong> — we discuss scope and agree on a fair rate together.</div>
     </div>
 
   </div>
