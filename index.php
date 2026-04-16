@@ -1210,12 +1210,11 @@ footer { padding-bottom:54px !important; }
   </a>
 
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#why">Why Me</a></li>
-    <li><a href="#pricing">Pricing</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About</a></li>
   </ul>
 
   <div class="nav-right">
@@ -1560,7 +1559,7 @@ footer { padding-bottom:54px !important; }
       <div class="pricing-plan">Quick Fix</div>
       <div class="pricing-price" style="align-items:flex-end;gap:2px">
         <span class="pricing-cur">$</span>
-        <span class="pricing-amount">10</span>
+        <span class="pricing-amount">15</span>
         <span class="pricing-range">–40</span>
       </div>
       <div class="pricing-period">flat estimate &nbsp;·&nbsp; small tasks</div>
